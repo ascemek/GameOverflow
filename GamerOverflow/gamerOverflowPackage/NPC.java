@@ -1,20 +1,11 @@
-/**
- * @author Sami Cemek
- * @author Zach 
- * @author Sebastian
- * @date Nov 15 2022
- * @version 1.1
- */
-
-public class Player {
-    
+public class NPC {
     private int attack;
 	private int health;
 	private int defend;
 	private int id;
 
-	// consturctor 
-	public Player(int id, int attack, int health, int defend)
+    // consturctor 
+	public NPC(int id, int attack, int health, int defend)
 	{
 		this.id = id;
 		this.attack = attack;
@@ -63,6 +54,5 @@ public class Player {
 			return true;
 	}
 
-
-
+    
 }

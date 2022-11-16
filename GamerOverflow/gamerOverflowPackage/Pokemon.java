@@ -6,28 +6,44 @@
 
 public class Pokemon extends Game{
 
-    public Pokemon(int id, int attack, int health) {
-        
-        //TODO Auto-generated constructor stub
-    }
 
     @Override
-    public void ComputerTurn() {
+    void ComputerTurn(NPC npc) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void PlayerTurn() {
+    void PlayerTurn(Player p) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public int UpdateScore() {
+    int UpdateScore() {
         // TODO Auto-generated method stub
         return 0;
     }
+
+    @Override
+    void VictoryEnd() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    void LoseEnd() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    void Player2Turn(Player p2) {
+        // TODO Auto-generated method stub
+        
+    }
+
+
 
 
 

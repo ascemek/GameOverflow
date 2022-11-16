@@ -8,18 +8,21 @@
 
 public abstract class Game {
     
-    public abstract void ComputerTurn();
+    abstract void Player2Turn(Player p2);
+    abstract void ComputerTurn(NPC npc);
+    abstract void PlayerTurn(Player p);
 
-    public abstract void PlayerTurn();
+    abstract int UpdateScore();
 
-    public abstract int UpdateScore();
+    abstract void VictoryEnd();
+    abstract void LoseEnd();
 
     /**
 	 * This method will print the winner between the player1 and player2
 	 * @param player1 is the first player object
 	 * @param player2 is the second player object
 	 */
-	public static void fight(Player player1, Player player2){
+	public void gameStart(Player player1, Player player2){
 
         boolean gameOn = true;
 
@@ -28,42 +31,51 @@ public abstract class Game {
 
 
         while(gameOn){
+            PlayerTurn(player1);
+            Player2Turn(player2);
+            UpdateScore();
 
-            //player1 attacks player 2
-            player2Health = player2Health - (player1.getAttack());
-            System.out.println("Player2 health is: " + player2Health);
-
-            //player2 attacks player 1
-            player1Health = player1Health - (player2.getAttack());
-            System.out.println("Player1 health is: " + player1Health);
-
-            if((player1Health <= 0)){
-                //winner is player2
+            if((player1Health <= 0))
+            {
                 gameOn = false;
-                System.out.println("The winner is: player2");
+                LoseEnd();
             }
 
-           if((player2Health <= 0)){
-                //winner is player1
+            if((player2Health <= 0))
+            {
                 gameOn = false;
-                System.out.println("The winner is: player1");
+                VictoryEnd();
             }
-           
         }
-        
     }
 
+    public void gameStart(Player player1, NPC computerNpc){
+
+        boolean gameOn = true;
+
+        int player1Health = player1.getHealth();
+        int npcHealth = computerNpc.getHealth();
 
 
+        while(gameOn)
+        {
+            PlayerTurn(player1);
+            ComputerTurn(computerNpc);
+            UpdateScore();
 
+            if((player1Health <= 0))
+            {
+                gameOn = false;
+                LoseEnd();
+            }
 
-
-
-
-
-
-
-
-
+            if((npcHealth <= 0))
+            {
+                gameOn = false;
+                VictoryEnd();
+            }
+            
+        }
+    }
 
 }
