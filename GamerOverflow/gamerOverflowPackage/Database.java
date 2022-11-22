@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * @author Sami Cemek
  * @author Zach 
@@ -17,5 +19,34 @@ public class Database {
     public static Database getDatabase(){
         return instance;
     }
+
+    private HashMap<String, Integer> pokemon = new HashMap<String, Integer>();
+    private HashMap<String, Integer> punchout = new HashMap<String, Integer>();
+    private HashMap<String, Integer> hangman = new HashMap<String, Integer>();
+
+    private HashMap[] scores = {hangman, pokemon, punchout}; 
+
+    public void updatePokemon(String name, Integer score)
+    {
+        pokemon.put(name, score);
+    }
+
+    public void updatePunchOut(String name, Integer score)
+    {
+        punchout.put(name, score);
+    }
+
+    public void updateHangman(String name, Integer score)
+    {
+        hangman.put(name, score);
+    }
+
+    
+
+
+
+
+
+
     
 }
