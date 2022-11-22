@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @version 1.1
  */
 
-public class Database {
+public class Database extends Observable{
     
    //Database class should have only one instance therefore we are going to use Singleton Pattern
 
@@ -40,6 +40,26 @@ public class Database {
     {
         hangman.put(name, score);
     }
+    
+    /*
+        public String getPokemonName(){
+        return name;
+        }
+
+        public void setPokemonName{
+        this.name = name;
+        }
+
+        public Integer getPokemonScore(){
+        return score;
+        }
+
+        public void setPokemonScore(){
+        this.score = score;
+        }
+     */
+
+
 
     
 
