@@ -8,15 +8,22 @@
 
 public class Menu implements Observer{
 
-    private String name;
-    private String id;
+    private String gameName;
+    private Integer id;
+
+    // constructor
+	public Menu(String gameName, Integer id)
+	{
+		this.gameName = gameName;
+		this.id = id;
+	}
 
     @Override
     public void handle(PropertyChangedEvent args) {
-        System.out.println(this.name + ": "
+        System.out.println(this.gameName + ": "
         + "(ID:" + this.id + ") "
           + args.propertyName + 
-        " has released a new score: " +  args.newValue);
+        " has a new score: " +  args.newValue);
         
     }
     
