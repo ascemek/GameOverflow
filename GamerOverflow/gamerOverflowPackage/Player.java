@@ -21,6 +21,18 @@ public class Player {
 		this.health = health;
 		this.defend = defend;
 	}
+
+	// set defend
+	public void setDefend(int hp) {
+		
+		this.defend += hp;
+	}
+
+	// get defend
+	public int getDefend() {
+		
+		return this.defend;
+	}
 	
 	
 	// set health
