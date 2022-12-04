@@ -64,6 +64,10 @@ public class Player {
 		
 		return this.attack;
 	}
+	public int getDefense()
+	{
+		return this.defend;
+	}
 
 	/**
 	 * @return true or false depending on the health point

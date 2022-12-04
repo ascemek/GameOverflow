@@ -43,6 +43,11 @@ public class NPC {
 		
 		return this.attack;
 	}
+	
+	public int getDefense()
+	{
+		return this.defend;
+	}
 
 	/**
 	 * @return true or false depending on the health point
