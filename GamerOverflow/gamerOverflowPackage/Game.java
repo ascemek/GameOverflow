@@ -41,7 +41,7 @@ public abstract class Game {
      * 
      * @param npc This is an NPC Enemy Character to fight against
      */
-    abstract void computerTurn(NPC npc);
+    abstract void computerTurn(Player p, NPC npc);
 
     /**
      * The playerTurn Method is supposed to simply prompt the player with the actions that they 
@@ -82,21 +82,23 @@ public abstract class Game {
         while(gameOn)
         {
             playerTurn(player1, scan);
-            computerTurn(computerNpc);
-            updateScore();
+            computerTurn(player1,computerNpc);
+
             checkVictory(player1, computerNpc);
+            updateScore();
 
             if((victory =true))
             {
-                gameOn = false;
                 loseEnd();
+                gameOn = false;
             }
 
             if((lose = true))
             {
-                gameOn = false;
                 victoryEnd();
+                gameOn = false;
             }
+
             
         }
     }
