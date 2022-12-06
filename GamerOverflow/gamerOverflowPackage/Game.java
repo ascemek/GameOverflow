@@ -71,13 +71,20 @@ public abstract class Game {
      */
     abstract void loseEnd();
 
-
-    public void gameStart(Scanner scan, Player player1, NPC computerNpc){
+    /**
+     * This is the template method that contains the algorithm of multiple game 
+     * subclasses. It also records the score the player has and then passes it to
+     * the menu in order to update the leaderboard/database of scores
+     * 
+     * @param scan a scanner we pass from the menu. Used to take input.
+     * @param player1 the player object to be controlled by the player (holds stats)
+     * @param computerNpc the npc object to be controlled by the computer (holds stats)
+     * @return returns the final score of the player 
+     */
+    public int gameStart(Scanner scan, Player player1, NPC computerNpc){
 
         boolean gameOn = true;
-        //int player1Health = player1.getHealth();
-        //int npcHealth = computerNpc.getHealth();
-
+        int finalscore = 0;
 
         while(gameOn)
         {
@@ -85,22 +92,21 @@ public abstract class Game {
             computerTurn(player1,computerNpc);
 
             checkVictory(player1, computerNpc);
-            updateScore();
+            finalscore = updateScore();
 
-            if((victory =true))
-            {
-                loseEnd();
-                gameOn = false;
-            }
-
-            if((lose = true))
+            if((victory == true))
             {
                 victoryEnd();
                 gameOn = false;
             }
 
-            
+            else if ((lose == true))
+            {
+                loseEnd();
+                gameOn = false;
+            }
         }
-    }
 
+        return finalscore;
+    }
 }

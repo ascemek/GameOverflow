@@ -13,13 +13,13 @@ public class Database extends Observable{
    //Database class should have only one instance therefore we are going to use Singleton Pattern
 
     // I need to have one database for sure so I will use Eager Initialization
-    private Database db;
+    private static Database instance = new Database();
     private int score;
     private String playerName;
 
-    Database(String playerName){
-        this.score = 0;
-        this.playerName = playerName;
+    public Database getDatabase()
+    {
+        return instance;
     }
 
     // set the latest score to given score as a parameter if it wasn't set before
@@ -85,15 +85,5 @@ public class Database extends Observable{
         this.score = score;
         }
      */
-
-
-
-    
-
-
-
-
-
-
     
 }
