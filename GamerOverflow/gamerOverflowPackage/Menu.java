@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.function.ObjDoubleConsumer;
 
 /**
  * @author Sami Cemek
@@ -10,7 +11,16 @@ import java.util.Scanner;
  */
 
 
-public class Menu {
+public class Menu implements Observer{
+
+    //reference to the database we want to update.
+    private static Database sami;
+
+    //Constructor defines what database we are referencing
+    public Menu(Database d1)
+    {
+        this.sami = d1;
+    }
 
     public static void userSelection() throws IndexOutOfBoundsException {
 
@@ -35,15 +45,22 @@ public class Menu {
             while (selectionTest){
 
                 if(selection.equals("1")){
-                    PunchOutTestMenu punchOutTestMenu = new PunchOutTestMenu();
-                    punchOutTestMenu.punchOut();
-                    selectionTest = false;
+                    Player p1 = new Player(1, 25, 100, 5);
+                    NPC npc1 = new NPC(1, 25, 100, 5);
+    
+                    Scanner ab = new Scanner(System.in);
+                    System.out.println("Start Punch-Out:");
+            
+                    Game punch = new PunchOut();
+                    int score = punch.gameStart(ab, p1, npc1);
+                    sami.updatePunchOut(username, score);
+                    sami.notifyAll(username, score);
                 }
 
                 if(selection.equals("2")){
-                    PokemonTestMenu pokemonTestMenu = new PokemonTestMenu();
+                    /*PokemonTestMenu pokemonTestMenu = new PokemonTestMenu();
                     pokemonTestMenu.printInstructions();
-                    selectionTest = false;
+                    selectionTest = false;*/
                 }
 
                 if(selection.equals("3")) {
@@ -66,5 +83,13 @@ public class Menu {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void handle(PropertyChangedEvent args) {
+        System.out.println("New Score on the leaderboard!");
+        System.out.println(args.propertyName +" got a score of: " + args.newValue);
+        //DO WE WANT TO PRINT THE DATABASE TO A TEXT FILE???
+    }
+
 
 }
