@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -9,65 +9,62 @@ import java.util.Scanner;
  * @version 1.1
  */
 
-public class Menu implements Observer{
 
-    private String gameName;
-    private Integer id;
+public class Menu {
 
-    // constructor
-	public Menu(String gameName, Integer id)
-	{
-		this.gameName = gameName;
-		this.id = id;
-	}
+    public static void userSelection() throws IndexOutOfBoundsException {
 
-    @Override
-    public void handle(PropertyChangedEvent args) {
-        System.out.println(this.gameName + ": "
-        + "(ID:" + this.id + ") "
-          + args.propertyName + 
-        " has a new score: " +  args.newValue);
-        
-    }
-    
-    public static void gameSelector(){
         try {
-            HashMap<String, Integer> gameSelector = new HashMap<>();
+            Scanner usernameObj = new Scanner(System.in);
 
-            Scanner sc = new Scanner(System.in);
-
-            // Adding elements to the Map
-            // using standard put() method
-            gameSelector.put("Punch-Out", 1);
-            gameSelector.put("Pokemon", 2);
-            gameSelector.put("Hangman", 3);
-
-
-            System.out.println("Select a username: ");
-            String username = sc.nextLine();// Read user input
+            System.out.println("\nGreetings, welcome to our game module! Please start by selecting a username. \n");
+            System.out.println("Enter a username: ");
+            String username = usernameObj.nextLine();// Read user input
             System.out.println("You current username is " + username);
 
             System.out.println("Hello, we have many games for you!");
-            System.out.println("Please select from the following");
-
 
             System.out.println("-1.Punch-Out\n" + "-2.Pokemon battle\n" + "-3.Hangman\n");
-            System.out.println("Enter a number:");
-            String gameSelected = sc.nextLine();
 
-            System.out.println("The game that you selected is: " + gameSelected + "\n" +
-                    "Current gamer tag: " + username);  // Output user input
-            sc.close();
+            // this is valid here for the user to see
+            System.out.println("Please type your game of choice. Either enter 1,2,or 3: ");
+            String selection = usernameObj.nextLine();
 
-        } catch (Exception e){
-            System.out.println("Invalid user input, please enter a valid with in the range please");
+            boolean selectionTest = true;
+
+            while (selectionTest){
+
+                if(selection.equals("1")){
+                    PunchOutTestMenu punchOutTestMenu = new PunchOutTestMenu();
+                    punchOutTestMenu.punchOut();
+                    selectionTest = false;
+                }
+
+                if(selection.equals("2")){
+                    PokemonTestMenu pokemonTestMenu = new PokemonTestMenu();
+                    pokemonTestMenu.printInstructions();
+                    selectionTest = false;
+                }
+
+                if(selection.equals("3")) {
+
+                    // when the user selects 3 then the hangman game will be implemented
+                    HangmanPlayerTwoVersion hangmanPlayerTwoVersion = new HangmanPlayerTwoVersion();
+                    hangmanPlayerTwoVersion.hangmanEngine();
+                    selectionTest = false;
+
+                } else {
+                    System.out.println("You did something wrong sucker, please try again!");
+                    System.out.println("Please type your game of choice. Either enter 1, 2, or 3: ");
+                     selection = usernameObj.nextLine();
+                }
+            }
+            usernameObj.close();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-
-        gameSelector();
-    }
-    
-    
 }
