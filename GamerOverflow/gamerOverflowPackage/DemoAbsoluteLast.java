@@ -12,13 +12,12 @@ public class DemoAbsoluteLast {
         
         boolean infinite = true;
 
-        Database d1 = new Database();
+        Database d1 = Database.getDatabase();
         MenuAbsoluteLast menu = new MenuAbsoluteLast(d1);
         d1.subscribe(menu);
 
-        while (infinite == true)
-        {
-            menu.userSelection();
-        }
+
+        Menu menu1 = new Menu();
+        menu1.userSelection();
     }
 }

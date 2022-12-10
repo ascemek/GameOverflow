@@ -5,174 +5,93 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 public class HangmanPlayerTwoVersion {
-    private static boolean printWordState(String word, List<Character> playerGuesses){
+	 
+	 private List<Character> playerGuesses = new ArrayList<>();
+     private int winCounter = 0;
+     private int score = 9000;
+     private int wrongCount = 0;
 
-       String asterisk = new String(new char[word.length()]).replace("\0", "*");
+     private int guessesLeft = 9;
+     private String word;
+	 private Scanner scanner = new Scanner(System.in);
+	
+    public void hangmanEngine() throws FileNotFoundException {
 
-        /**
-         *
-         * THIS HIDES THE WORD
-         */
-//        System.out.println("Please try to guess the word");
-//        asterisk.contains("*");
-//        System.out.println("Guess any letter in the word");
-//        System.out.println(asterisk);
+        introduction();
+        word=getWord();
+        boolean playingGame = true;
 
-        /**
-         * THIS SHOWS THE WORD!
-         */
-        System.out.println(word);
+        while (playingGame){
 
+        	boolean check=printWordState();
+            if(!check){
+                // this wrong count increment for each time the user makes an incorrect guess
+                wrongCount++;
+            }
+            getPlayerGuess();
 
-        int correctCount = 0; // counts how many are correct
-        for (int i = 0; i < word.length(); i++) {
+            if(printWordState()){
+                System.out.println("You won the game!");
+                playingGame = false;
+            } System.out.println("Please enter your guess for the word:");
 
-            if (playerGuesses.contains(word.charAt(i))){
-                System.out.print(word.charAt(i)); // this will print the character then the player guesses correctly
-                correctCount++;
-            } else System.out.print("-");
+            if(playingGame) {
+            playingGame = evaluateWord();
+            }
+            
+            if(playingGame) {
+            hangmanPicture(wrongCount);
+            playingGame = handleLosing();
+            }
         }
-
-        System.out.println();
-
-        return (word.length() == correctCount);
+        askToPlayAgain();
     }
-    private static boolean getPlayerGuess(Scanner keyBoardInput, String word, List<Character> playerGuesses){
+    
+    private boolean getPlayerGuess( ){
 
         System.out.println("\nPlease enter a letter:");
-
-        String letterGuess = keyBoardInput.nextLine(); // this gets the next string input from the user
+     
+        String letterGuess = scanner.nextLine(); // this gets the next string input from the user
 
         playerGuesses.add(letterGuess.charAt(0)); // this is for the first character
 
         return word.contains(letterGuess);
     }
-    public void hangmanEngine() throws FileNotFoundException {
+    
+    
+    private boolean printWordState(){
 
-        System.out.println("Thank you for choosing Hangman!\n");
-        System.out.println("Instructions for the game:");
-        System.out.println("Please ONLY enter one letter when the prompt asks for a letter.\n" +
-                "Try to guess the word after entering a letter. ");
-        System.out.println("If you select player 1, then try to guess the word. ");
-        System.out.println("If you select 2 players, then player 1 will enter a word while player 2 will attempt to guess the word.");
-        System.out.println("You are currently starting with 9000 points, and for each incorrect guess you will lose 900 points.");
-        System.out.println("Good luck!\n");
-
-        Scanner keyBoardInput = new Scanner(System.in);
-        System.out.println("Would you like 1 or 2 players? ");
-        String players = keyBoardInput.nextLine();
-        String word;
-
-        if(players.equals("1")){
-
-            Scanner scanner = new Scanner(new File("GamerOverflow/gamerOverflowPackage/alternativeWords.txt"));
-
-            List<String> words= new ArrayList<>();
-
-            while (scanner.hasNext()){
-                words.add(scanner.nextLine()); // adding words to the list
-            }
-            Random random = new Random();
-
-            // this is what we will change to get another player
-            word = words.get(random.nextInt(words.size())); // this will give a random word in the list
-        } else{
-            System.out.println("Player 1, please enter your word");
-            word = keyBoardInput.nextLine();
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-            System.out.println("Ready for player two, good luck!");
-        }
+        String asterisk = new String(new char[word.length()]).replace("\0", "*");
+         /**
+          *
+          * THIS HIDES THE WORD
+          */
+        
+//         System.out.println("Please try to guess the word");
+//         asterisk.contains("*");
+//         System.out.println(asterisk);
 
 
-        /**** HANGMAN GAME *********/
+         /**
+          * THIS SHOWS THE WORD!
+          */
+         System.out.println(word);
 
-        List<Character> playerGuesses = new ArrayList<>();
+         int correctCount = 0; // counts how many are correct
+         for (int i = 0; i < word.length(); i++) {
 
-        // let's start with 1000 score and reduce the score for each wrong letter or word guess
+             if (playerGuesses.contains(word.charAt(i))){
+                 System.out.print(word.charAt(i)); // this will print the character then the player guesses correctly
+                 correctCount++;
 
-        int winCounter = 0; // I do not think this is working
+             } else System.out.print("-");
 
-       // this is not being used
-       int score = 9000;
+         }
+         System.out.println();
 
-       int wrongCount = 0;  // we want the winCounter to work
-
-        boolean playingGame = true;
-
-        // playingGame loop
-        while (playingGame){
-
-            hangmanPicture(wrongCount);
-
-            if(wrongCount >= 9){
-                System.out.println("You lose the game sucker!");
-                System.out.println("The word was: " + word);
-
-                playingGame = false;
-            }
-
-            if(!printWordState(word, playerGuesses)){
-                wrongCount++;
-            }
-
-            getPlayerGuess(keyBoardInput, word, playerGuesses);
-
-            if(printWordState(word, playerGuesses)){
-                System.out.println("You won the game!");
-//                winCounter++; // my win counter  is wrong
-//                System.out.println("Your total score for the correct guesses: " );
-
-                playingGame = false;
-            }
-
-            System.out.println("Please enter your guess for the word:");
-
-            // if the player guesses the correct word then they win the game
-            if(keyBoardInput.nextLine().equals(word) ){
-                System.out.println("You won the game!");
-                winCounter++; // my win counter are wrong
-                System.out.println("Your win streak is: " + winCounter + "/1");
-                System.out.println("You total score for winning is: " + (score) + " pts");
-                System.out.println("\n");
-                System.out.println("Do you want to keep playing the game? Muahahaha!! \nPlease enter yes or no: ");
-
-
-                // scanner here to read an input
-                // if yes then call hangManEngine
-                // if no playing game = false
-                // this is taking an input from the user
-                // if the user enters yes then call the hangman engine i.e., start the game over
-                Scanner scanner = new Scanner(System.in);
-
-                String testingSomething = scanner.nextLine();
-
-                if(testingSomething.equals("yes")){
-                    // this is going to call the function to start the game again
-                    hangmanEngine();
-
-                } else if (testingSomething.equals("no")) {
-                    System.out.println("Thank you for playing :) " );
-                    playingGame = false;
-                    scanner.close();
-                    /**
-                     * CLOSING THE SCANNER IS CAUSING AN ERROR HERE 
-                     */
-
-
-                } else {
-                    System.out.println("Could not get what you said, peace!");
-                    playingGame = false;
-                }
-
-            } else {
-                System.out.println("Nope! Please try again.");
-                score = score - 900;
-                System.out.println("The current score: " + score);
-
-            }
-        }
-    }
-    private static void hangmanPicture(Integer wrongCount){
+         return (word.length() == correctCount);
+     }
+     private void hangmanPicture(Integer wrongCount){
 
         if(wrongCount >= 1){
             System.out.println("   ____________");
@@ -204,6 +123,102 @@ public class HangmanPlayerTwoVersion {
         System.out.println("");
         System.out.println("");
     }
+    private void introduction() {
+
+        System.out.println();
+    	System.out.println("Instructions for the game:");
+    	System.out.println("Please ONLY enter one letter when the prompt asks for a letter.\n" +
+                  "Try to guess the word after entering a letter. ");
+    	System.out.println("If you select player 1, then try to guess the word. ");
+    	System.out.println("If you select 2 players, then player 1 will enter a word while player 2 will attempt to guess the word.");
+    	System.out.println("You are currently starting with 9000 points, and for each incorrect guess you will lose 1000 points.");
+    	System.out.println("You have 9 total tries to guess the word. Good luck!\n");
+    }
+    private String getWord() throws FileNotFoundException {
+        
+        System.out.println("Would you like 1 or 2 players? ");
+       String  players = scanner.nextLine();
+    	String word;
+    	  if(players.equals("1")){
+
+              Scanner scanner = new Scanner(new File("GamerOverflow/gamerOverflowPackage/alternativeWords.txt"));
+
+              List<String> words= new ArrayList<>();
+
+              while (scanner.hasNext()){
+                  words.add(scanner.nextLine()); // adding words to the list
+              }
+              Random random = new Random();
+
+              // this is what we will change to get another player
+              word = words.get(random.nextInt(words.size())); // this will give a random word in the list
+          } else{
+              System.out.println("Player 1, please enter your word");
+              Scanner scanner = new Scanner(System.in);
+              word =scanner.nextLine();
+              System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+              System.out.println("Ready for player two, good luck!");
+          }
+    	  return word;
+    }
+    private boolean askToPlayAgain() throws FileNotFoundException {
+    	 
+    	System.out.println("\nDo you want to keep playing the game? Muahahaha!! \nPlease enter yes or no: ");
+        String playAgain = scanner.nextLine();
+        if(playAgain.equals("yes")){
+        
+        	introduction();
+        	playerGuesses = new ArrayList<>();
+            word = getWord();
+            winCounter = 0;
+            score = 9000;
+            wrongCount = 0;  // we want the winCounter to work
+
+            return true;
+
+        } else if (playAgain.equals("no")) {
+            System.out.println("Thank you for playing :) " );
+            return false;
+           
+        } else {
+            System.out.println("Could not get what you said, peace!");
+            return false;
+        }
+
+    }
+    private void handleWinning() {
+    	winCounter++;
+       System.out.println("You won the game!");
+       System.out.println("Your win streak is: " + winCounter + "/1");
+       System.out.println("You total score for winning is: " + (score) + " pts");
+       System.out.println("\n");
+    }
+    private boolean evaluateWord() throws FileNotFoundException {
+    	 if(scanner.nextLine().equals(word) ){
+         	handleWinning();
+            return askToPlayAgain();
+            
+         } else {
+             score = score - 1000;
+             guessesLeft = guessesLeft -1;
+             System.out.println("The current score: " + score);
+             System.out.println("You have " + guessesLeft + " tries left!");
+            return true;
+         }
+    }
+    private boolean handleLosing() {
+        if(wrongCount >= 9){
+            System.out.println("Ouch! You guessed wrong " + wrongCount + " times!");
+            System.out.println("You lose the game sucker!");
+            System.out.println("The word was: " + word);
+            System.out.println("Your current score is " + score);
+
+            return false;
+        }
+
+        return true;
+    }
+
 }
 
 
