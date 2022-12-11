@@ -16,27 +16,18 @@ public class Menu implements Observer{
     //reference to the database we want to update.
     private static Database sami;
 
-    //Constructor defines what database we are referencing
-    public Menu(Database d1)
-    {
-        this.sami = d1;
-    }
-
     public static void userSelection() throws IndexOutOfBoundsException {
 
         try {
+
             Scanner usernameObj = new Scanner(System.in);
 
             System.out.println("\nGreetings, welcome to our game module! Please start by selecting a username. \n");
             System.out.println("Enter a username: ");
             String username = usernameObj.nextLine();// Read user input
             System.out.println("You current username is " + username);
-
             System.out.println("Hello, we have many games for you!");
-
             System.out.println("-1.Punch-Out\n" + "-2.Pokemon battle\n" + "-3.Hangman\n");
-
-            // this is valid here for the user to see
             System.out.println("Please type your game of choice. Either enter 1,2,or 3: ");
             String selection = usernameObj.nextLine();
 
@@ -66,6 +57,7 @@ public class Menu implements Observer{
                 if(selection.equals("3")) {
 
                     // when the user selects 3 then the hangman game will be implemented
+                    System.out.println("\nThank you " + username + " for choosing hangman!");
                     HangmanPlayerTwoVersion hangmanPlayerTwoVersion = new HangmanPlayerTwoVersion();
                     hangmanPlayerTwoVersion.hangmanEngine();
                     selectionTest = false;
@@ -90,6 +82,4 @@ public class Menu implements Observer{
         System.out.println(args.propertyName +" got a score of: " + args.newValue);
         //DO WE WANT TO PRINT THE DATABASE TO A TEXT FILE???
     }
-
-
 }
