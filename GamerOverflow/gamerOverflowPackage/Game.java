@@ -57,19 +57,23 @@ public abstract class Game {
      * 
      * @return An int representing the current score 
      */
-    abstract int updateScore();
+    abstract void updateScore();
 
     /**
      * Displays a message informing the player they win. 
-     * Then updates the database of scores with the user's score.
      */
     abstract void victoryEnd();
 
     /**
      * Displays a message informing the player they lose. 
-     * Then updates the database of scores with the user's score.
      */
     abstract void loseEnd();
+    /**
+     * This is used to pass the game's score onto another class for use in updating
+     * the database.
+     * @return an int value representing the game's score
+     */
+    abstract int returnScore();
 
     /**
      * This is the template method that contains the algorithm of multiple game 
@@ -81,10 +85,9 @@ public abstract class Game {
      * @param computerNpc the npc object to be controlled by the computer (holds stats)
      * @return returns the final score of the player 
      */
-    public int gameStart(Scanner scan, Player player1, NPC computerNpc){
+    public void gameStart(Scanner scan, Player player1, NPC computerNpc){
 
         boolean gameOn = true;
-        int finalscore = 0;
 
         while(gameOn)
         {
@@ -92,7 +95,7 @@ public abstract class Game {
             computerTurn(player1,computerNpc);
 
             checkVictory(player1, computerNpc);
-            finalscore = updateScore();
+            updateScore();
 
             if((victory == true))
             {
@@ -106,7 +109,5 @@ public abstract class Game {
                 gameOn = false;
             }
         }
-
-        return finalscore;
     }
 }
