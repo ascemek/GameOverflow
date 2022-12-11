@@ -8,6 +8,7 @@ public class PunchOut extends Game {
     int npcPoints = 3;
     int turns = 0;
     int totalScore = 0;
+    int npcHealth;
 
     Scanner playerInput;
     
@@ -36,7 +37,7 @@ public class PunchOut extends Game {
             {
                 System.out.println("The enemy fighter punched to their left!");
                 System.out.println("You got hit!");
-                totalScore = totalScore - 10;
+                totalScore = totalScore - 100;
 
                 int damage = npc.getAttack()-p.getDefense();
                 System.out.println("You take " + damage + " damage!");
@@ -61,7 +62,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("Enemy fighter uses a special move!");
                     System.out.println("Blocking Special Attacks doesnt work!");
-                    totalScore = totalScore - 20;
+                    totalScore = totalScore - 200;
 
                     int damage = 2*(npc.getAttack()-p.getDefense());
                     System.out.println("You take " + damage + " damage!");
@@ -95,7 +96,7 @@ public class PunchOut extends Game {
             {
                 System.out.println("The enemy fighter punched to their right!");
                 System.out.println("You got hit!");
-                totalScore = totalScore - 10;
+                totalScore = totalScore - 100;
 
                 int damage = npc.getAttack()-p.getDefense();
                 System.out.println("You take " + damage + " damage!");
@@ -114,7 +115,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("Enemy fighter uses a special move!");
                     System.out.println("Blocking Special Attacks doesnt work!");
-                    totalScore = totalScore - 20;
+                    totalScore = totalScore - 200;
 
                     int damage = 2*(npc.getAttack()-p.getDefense());
                     System.out.println("You take " + damage + " damage!");
@@ -137,7 +138,7 @@ public class PunchOut extends Game {
             {
                 System.out.println("The enemy fighter blocked to their left!");
                 System.out.println("You landed a hit!");
-                totalScore = totalScore+10;
+                totalScore = totalScore+100;
 
                 int damage = (npc.getAttack()-p.getDefense());
                 System.out.println("The enemy takes " + damage + " damage!");
@@ -194,7 +195,7 @@ public class PunchOut extends Game {
                     System.out.println("Enemy fighter uses a special move!");
                     System.out.println("You lightly jab them before it can go off!");
                     System.out.println("No damage is dealt, but you gain special energy!");
-                    totalScore = totalScore+ 15;
+                    totalScore = totalScore+ 150;
                     npcPoints--;
                     specialPoints++;
                 }
@@ -202,9 +203,9 @@ public class PunchOut extends Game {
                 {
                     System.out.println("Enemy fighter tries a special move but has no energy left!");
                     System.out.println("They stumble straight into your attack! DOUBLE DAMAGE!");
-                    totalScore = totalScore+ 30;
+                    totalScore = totalScore+ 300;
 
-                    int damage = 2*(npc.getAttack()-p.getDefense());
+                    int damage = 2*(p.getAttack()-npc.getDefense());
                     System.out.println("The enemy takes " + damage + " damage!");
                     npc.setHealth(damage);
                     npcPoints--;
@@ -275,7 +276,7 @@ public class PunchOut extends Game {
                     System.out.println("Enemy fighter uses a special move!");
                     System.out.println("You lightly jab them before it can go off!");
                     System.out.println("No damage is dealt, but you gain special energy!");
-                    totalScore = totalScore + 15;
+                    totalScore = totalScore + 150;
                     npcPoints--;
                     specialPoints++;
                 }
@@ -283,7 +284,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("Enemy fighter tries a special move but has no energy left!");
                     System.out.println("They stumble straight into your attack! DOUBLE DAMAGE!");
-                    totalScore = totalScore+ 30;
+                    totalScore = totalScore+ 300;
 
                     int damage = 2*(npc.getAttack()-p.getDefense());
                     System.out.println("The enemy takes " + damage + " damage!");
@@ -330,7 +331,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("Enemy fighter uses a special move!");
                     System.out.println("You barely manage to dodge the hit!");
-                    totalScore = totalScore + 5;
+                    totalScore = totalScore + 50;
                     npcPoints--;
                     
                 }
@@ -356,7 +357,7 @@ public class PunchOut extends Game {
             {
                 System.out.println("The enemy fighter punched to their left!");
                 System.out.println("You dodge right into their fist!");
-                totalScore = totalScore - 10;
+                totalScore = totalScore - 100;
 
                 int damage = (npc.getAttack()-p.getDefense());
                 System.out.println("You take " + damage + " damage!");
@@ -381,7 +382,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("Enemy fighter uses a special move!");
                     System.out.println("You barely manage to dodge the hit!");
-                    totalScore = totalScore + 5;
+                    totalScore = totalScore + 50;
                     npcPoints--;
                     
                 }
@@ -406,6 +407,7 @@ public class PunchOut extends Game {
 
                     int damage = 2*(p.getAttack()-npc.getDefense());
                     System.out.println("The enemy takes " + damage + " damage!");
+                    npc.setHealth(damage);
                     specialPoints--;
                     
                 }
@@ -424,7 +426,7 @@ public class PunchOut extends Game {
                     System.out.println("You use a special move!");
                     System.out.println("The enemy fighter lightly jabs you before it can go off!");
                     System.out.println("No damage is dealt, but they gain special energy!");
-                    totalScore = totalScore - 15;
+                    totalScore = totalScore - 150;
 
                     specialPoints--;
                     npcPoints++;
@@ -433,7 +435,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("You try a special move but have no energy left!");
                     System.out.println("You stumble straight into their attack! DOUBLE DAMAGE!");
-                    totalScore = totalScore -  30;
+                    totalScore = totalScore -  300;
 
                     int damage = 2*(p.getAttack()-npc.getDefense());
                     System.out.println("The enemy takes " + damage + " damage!");
@@ -449,7 +451,7 @@ public class PunchOut extends Game {
                 {
                     System.out.println("You use a special move!");
                     System.out.println("The enemy fighter barely manages to dodge the hit!");
-                    totalScore = totalScore - 5;
+                    totalScore = totalScore - 50;
                     specialPoints--;
                     
                 }
@@ -476,7 +478,7 @@ public class PunchOut extends Game {
                     {
                         System.out.println("The enemy fighter tries to use a special but has no energy for it!");
                         System.out.println("YOU LAND A SPECIAL ATTACK ON THE ENEMY FIGHTER WHO IS DEFENSELESS! DOUBLE DAMAGE!!!");
-                        totalScore = totalScore + 30;
+                        totalScore = totalScore + 300;
 
                         int damage = 4*(p.getAttack()-npc.getDefense());
                         System.out.println("The enemy takes " + damage + " damage!");
@@ -491,7 +493,7 @@ public class PunchOut extends Game {
                     {
                         System.out.println("You try to use a special but lack the energy! The enemy on the other hand-");
                         System.out.println("THEY LAND A SPECIAL ATTACK ON THE YOU! DOUBLE DAMAGE!!!");
-                        totalScore = totalScore + 30;
+                        totalScore = totalScore + 300;
 
                         int damage = 4*(npc.getAttack()-p.getDefense());
                         System.out.println("You take " + damage + " damage!");
@@ -508,6 +510,8 @@ public class PunchOut extends Game {
                 }
             }
         }
+
+        npcHealth = npc.getHealth();
     }
 
 
@@ -528,7 +532,7 @@ public class PunchOut extends Game {
         {
             System.out.println("-------------------------------------------------------------------------------");
             System.out.println("You are currently at: " + p.getHealth() + " health with " + specialPoints + " special attacks left.");
-            System.out.println("Your enemy is still standing with " + npcPoints + " special attacks left.");
+            System.out.println("Your enemy is still standing with " + npcPoints + " special attacks left and "+ npcHealth + " health.");
             System.out.println("-------------------------------------------------------------------------------");
             System.out.println("Your options are:");
             System.out.println("1) Block Left       2) Block Right");
@@ -588,9 +592,8 @@ public class PunchOut extends Game {
     }
 
     @Override
-    int updateScore() {
-        totalScore = totalScore + 10;
-        return totalScore;
+    void updateScore() {
+        totalScore = totalScore + 100;
     }
 
     @Override
@@ -612,6 +615,7 @@ public class PunchOut extends Game {
     {
         Random randy = new Random();
         int actionChoice = randy.nextInt(7);
+        //int actionChoice = 6;
         return actionChoice;
 
     }
@@ -638,5 +642,10 @@ public class PunchOut extends Game {
         {
             System.out.println("Both fighters are still standing!!!");
         }
+    }
+
+    @Override
+    int returnScore() {
+        return totalScore;
     }
 }

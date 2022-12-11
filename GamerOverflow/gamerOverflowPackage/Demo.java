@@ -4,17 +4,20 @@
  * @author Sebastian
  * @date Nov 09 2022
  * @version 1.1
+ * 
+ * This is the Demo class that creates the menu and database. It starts the program.
  */
-
 public class Demo {
 
     public static void main(String[] args) {
 
-        Database d1 = new Database();
-        Menu menu = new Menu(d1);
+        Database d1 = Database.getDatabase();
 
-        d1.subscribe(menu);
-        menu.userSelection();
+        Menu menu1 = new Menu(d1);
+        d1.subscribe(menu1);
+
+        menu1.userSelection();
+    
         
     }
 }

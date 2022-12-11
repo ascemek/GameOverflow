@@ -6,8 +6,10 @@ import java.util.Scanner;
  * @author Sebastian
  * @date Nov 09 2022
  * @version 1.1
+ * 
+ * This is the abstract class that contains the template methods and algorithm
+ * used by two other subclasses (different games) in the program.
  */
-
 public abstract class Game {
 
     boolean victory = false;
@@ -33,7 +35,6 @@ public abstract class Game {
     {
         lose = true;
     }
-
 
     /**
      * The computerTurn method is supposed to decide what the enemy will do in response
@@ -92,7 +93,7 @@ public abstract class Game {
         while(gameOn)
         {
             playerTurn(player1, scan);
-            computerTurn(player1,computerNpc);
+            computerTurn(player1, computerNpc);
 
             checkVictory(player1, computerNpc);
             updateScore();
