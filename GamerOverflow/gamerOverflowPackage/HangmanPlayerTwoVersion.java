@@ -6,14 +6,14 @@ import java.util.Random;
 import java.util.Scanner;
 public class HangmanPlayerTwoVersion {
 	 
-	 private List<Character> playerGuesses = new ArrayList<>();
-     private int winCounter = 0;
-     private int score = 9000;
-     private int wrongCount = 0;
+	private List<Character> playerGuesses = new ArrayList<>();
+    private int winCounter = 0;
+    private int score = 9000;
+    private int wrongCount = 0;
 
-     private int guessesLeft = 9;
-     private String word;
-	 private Scanner scanner = new Scanner(System.in);
+    private int guessesLeft = 9;
+    private String word;
+	private Scanner scanner = new Scanner(System.in);
 	
     public void hangmanEngine() throws FileNotFoundException {
 
@@ -67,15 +67,15 @@ public class HangmanPlayerTwoVersion {
           * THIS HIDES THE WORD
           */
         
-//         System.out.println("Please try to guess the word");
-//         asterisk.contains("*");
-//         System.out.println(asterisk);
+         //System.out.println("Please try to guess the word");
+         //asterisk.contains("*");
+         System.out.println(asterisk);
 
 
          /**
           * THIS SHOWS THE WORD!
           */
-         System.out.println(word);
+         //System.out.println(word);
 
          int correctCount = 0; // counts how many are correct
          for (int i = 0; i < word.length(); i++) {
@@ -141,7 +141,7 @@ public class HangmanPlayerTwoVersion {
     	String word;
     	  if(players.equals("1")){
 
-              Scanner scanner = new Scanner(new File("GamerOverflow/gamerOverflowPackage/alternativeWords.txt"));
+              Scanner scanner = new Scanner(new File("gamerOverflowPackage/alternativeWords.txt"));
 
               List<String> words= new ArrayList<>();
 
@@ -167,12 +167,13 @@ public class HangmanPlayerTwoVersion {
         String playAgain = scanner.nextLine();
         if(playAgain.equals("yes")){
         
-        	introduction();
+        	
         	playerGuesses = new ArrayList<>();
             word = getWord();
             winCounter = 0;
             score = 9000;
             wrongCount = 0;  // we want the winCounter to work
+            hangmanEngine();
 
             return true;
 
@@ -217,6 +218,11 @@ public class HangmanPlayerTwoVersion {
         }
 
         return true;
+    }
+
+    public int returnHangmanScore()
+    {
+        return score;
     }
 
 }
