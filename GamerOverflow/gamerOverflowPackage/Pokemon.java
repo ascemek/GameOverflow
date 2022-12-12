@@ -22,10 +22,6 @@ public class Pokemon extends Game{
     private int totalScore = 0;
     private static int duelWon = 0;
 
-    public int getTotalScore() {
-        return totalScore;
-    }
-
     static void printInstructions(){
 
         System.out.println("Welcome to Pokemon Duel!");
@@ -104,10 +100,14 @@ public class Pokemon extends Game{
     }
 
     @Override
-    int updateScore() {
+    int returnScore() {
+        return totalScore;
+    }
+
+    @Override
+    public void updateScore() {
         totalScore = totalScore + 100;
         System.out.println("Your total score is: " + totalScore);
-        return totalScore;
     }
 
     @Override
