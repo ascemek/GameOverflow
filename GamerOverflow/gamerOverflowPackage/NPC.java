@@ -3,17 +3,32 @@ public class NPC {
 	private int health;
 	private int defend;
 	private int id;
+	private String name;
 
-    // consturctor 
-	public NPC(int id, int attack, int health, int defend)
+    // consturctor 1
+	public NPC(int id, int attack, int health, int defend, String name)
 	{
+		this.name = name;
 		this.id = id;
 		this.attack = attack;
 		this.health = health;
 		this.defend = defend;
 	}
-	
-	
+
+	 // consturctor 2
+	 public NPC(int id, int attack, int health, int defend)
+	 {
+		this.id = id;
+		this.attack = attack;
+		this.health = health;
+		this.defend = defend;
+	 }
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	// set health
 	public void setHealth(int hp) {
 		
