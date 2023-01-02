@@ -31,7 +31,10 @@ public abstract class Observable {
 	// notify all of the observers when a field changes
 	public void notifyAll(String propertyName, Object newValue)
 	{
+	
 		for(Observer o: observers){
+			
+
 			o.handle(new PropertyChangedEvent(propertyName, newValue));
 		}
 	}

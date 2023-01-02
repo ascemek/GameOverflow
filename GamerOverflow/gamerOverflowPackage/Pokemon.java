@@ -9,19 +9,12 @@ import java.util.Scanner;
 
 public class Pokemon extends Game{
 
-    // Player character
-    //private static Player player = new Player(0, 12, 100, 10);
-
-    // There are 5 enemies 
-    //private static NPC opp1 =  new NPC(1, 10, 100, 7, "Pikachu");
-    // private NPC opp2 = new NPC(2, 20, 110, 8, "Evee");
-    // private NPC opp3 = new NPC(3, 25, 120, 9, "Piplup");
-    // private NPC opp4 = new NPC(4, 30, 130, 10, "Charmander");
-    // private NPC opp5 = new NPC(5, 40, 1400, 13, "Charizard");
-
     private int totalScore = 0;
     private static int duelWon = 0;
 
+    /**
+     * Prints the instructions of the game
+     */
     static void printInstructions(){
 
         System.out.println("Welcome to Pokemon Duel!");
@@ -30,16 +23,14 @@ public class Pokemon extends Game{
         System.out.println("Do you have what it takes to be the best Pokemon trainer?");
         System.out.println("Well, we shall see. Here are the rules:" + "\n");
         System.out.println("Your Pokemon is going to fight with 5 opponents.");
-        System.out.println("You roll a die every round and");
-        System.out.println("1: Divide your stats by 2");
-        System.out.println("2: +10 health points to both Pokemons");
-        System.out.println("3: -20 health points of your Pokemon");
-        System.out.println("4: Multiply your stats by 2");
-        System.out.println("5: +20 your defense point");
-        System.out.println("6: +100 to your overall score" + "\n");
+        System.out.println("You roll a die every round and based on the result your pokemon's stats will change.");
+        System.out.println("1: attack point increase by 1");
+        System.out.println("2: +attack point increase by 2");
+        System.out.println("3: attack point increase by 3");
+        System.out.println("4: attack point increase by 4");
+        System.out.println("5: attack point increase by 5");
+        System.out.println("6: attack point increase by 6" + "\n");
          
-
-
         System.out.println("Your Pokemon will start with the following stats:" + "\n" 
         + "Health = 100" + "\n"
         + "Defense = 10" + "\n"
@@ -50,9 +41,12 @@ public class Pokemon extends Game{
 
         String pokemonName = sc.nextLine();  // Read user input
         System.out.println("Pokemon is: " + pokemonName);  // Output user input
-        sc.close();
+        //sc.close();
     }
 
+     /**
+     * Checks what the current game status is (this is decided based on user requirements)
+     */
     @Override
     void checkVictory(Player p, NPC opp) {
         if (p.isDead() == true)
@@ -72,44 +66,42 @@ public class Pokemon extends Game{
         
     }
 
+    /**
+     * The computerTurn method is supposed to decide what the enemy will do in response
+     * to the player's input. It will then display the results of the player's and enemy's actions.
+     * 
+     * @param p Player character used in the game that performs the actions the player chooses
+     * @param npc This is an NPC Enemy Character to fight against
+     */
     @Override
     void computerTurn(Player p, NPC npc) {
-        // NPC attacks player
-        System.out.println("Player health BEFORE " + p.getHealth());
-        int damage = (npc.getAttack()-p.getDefense());
-        p.setHealth(damage);
-        System.out.println("You took " + damage + " damage!");
-        System.out.println("Player health AFTER " + p.getHealth());
-
-
-        System.out.println("------------------------------------------------------------------------");
-
-        //player attacks NPC
-        System.out.println("NPC health BEFORE " + npc.getHealth());
-        int damage1 = (p.getAttack()-npc.getDefense());
-        npc.setHealth(damage);
-        System.out.println("The opponent took " + damage1 + " damage!");
-        System.out.println("NPC health AFTER " + npc.getHealth());
+        System.out.println("NPC attacks the Player");
     }
 
+    /**
+     * The playerTurn Method is supposed to simply prompt the player with the actions that they 
+     * can choose have their character do.
+     * 
+     * @param p Player character used in the game that performs the actions the player chooses
+     * @param sca The scanner that parses the user's input 
+     */
     @Override
     void playerTurn(Player p, Scanner sca) {
-        // TODO Auto-generated method stub
-        System.out.println("YARRAK");
-        
+        System.out.println("Player attacks the NPC");
     }
 
-    @Override
-    int returnScore() {
-        return totalScore;
-    }
-
+    /**
+     * Updates the score by 100 and prints the totalScore
+     */
     @Override
     public void updateScore() {
         totalScore = totalScore + 100;
         System.out.println("Your total score is: " + totalScore);
     }
 
+    /**
+     * Displays a message informing the player they win. 
+     */
     @Override
     void victoryEnd() {
         System.out.println("You beat your opponent");
@@ -117,6 +109,9 @@ public class Pokemon extends Game{
         
     }
 
+    /**
+     * Displays a message informing the player they lose. 
+     */
     @Override
     void loseEnd() {
         System.out.println("You lost agains this opponent!");
@@ -124,6 +119,19 @@ public class Pokemon extends Game{
         
     }
 
+    /**
+     * Return the total score 
+     * @return totalScore
+     */
+    @Override
+    int returnScore() {
+        return totalScore;
+    }
+
+    /**
+     * Used to roll a die that generates a number between 1 and 6
+     * @return number that is between 1 and 6
+     */
     public static int rollDieLast(){
 		Random randomGenerator = new Random();
 		int number = randomGenerator.nextInt(6) + 1;
@@ -131,11 +139,16 @@ public class Pokemon extends Game{
 		return number;
 
 	}
-
+    /**
+     * Makes the player1 and player2 fight
+     * @param player1 the player object to be controlled by the player (holds stats)
+     * @param player2 the npc object to be controlled by the computer (holds stats)
+     */
     public static void fight(Player player1, NPC player2){
 
         boolean gameOn = true;
 
+        // access the values of the parameters
         int player1Health = player1.getHealth();
         int player2Health = player2.getHealth();
 
@@ -157,7 +170,7 @@ public class Pokemon extends Game{
             if(wannaRoll == 1){
 
                 int num = rollDieLast();
-                
+
                 if(num == 1){
                     player1Attack = player1Attack + 1;
                     System.out.println("Player rolled a die and attack point increase by 1.");
@@ -177,6 +190,7 @@ public class Pokemon extends Game{
                     player1Attack = player1Attack + 6;
                     System.out.println("Player rolled a die and attack point increase by 6.");
                 }
+                
             }
             
             System.out.println("player 1 attack point " + player1Attack);
@@ -208,7 +222,6 @@ public class Pokemon extends Game{
             if(wannaRollNPC == 1){
                 int num2 = rollDieLast();
 
-                System.out.print("NPC rolled a die and ");
                 if(num2 == 1){
                     player2Attack = player2Attack + 1;
                     System.out.println("attack point increase by 1.");
@@ -249,92 +262,57 @@ public class Pokemon extends Game{
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * Create the player and the NPCs and make them fight
+     */
+    public void runCode(){
 
-        Pokemon poki = new Pokemon();
+        printInstructions();
 
         // Main player character with the base stats
         Player player = new Player(0, 12, 100, 8);
 
         // NCP opponents
         NPC opp1 =  new NPC(1, 10, 100, 7, "Pikachu");
-        NPC opp2 = new NPC(2, 20, 110, 8, "Evee");
-        NPC opp3 = new NPC(3, 25, 120, 9, "Piplup");
-        NPC opp4 = new NPC(4, 30, 130, 10, "Charmander");
-        NPC opp5 = new NPC(5, 40, 1400, 13, "Charizard");
+        NPC opp2 = new NPC(2, 11, 110, 8, "Evee");
+        NPC opp3 = new NPC(3, 12, 115, 9, "Piplup");
+        NPC opp4 = new NPC(4, 13, 120, 10, "Charmander");
+        NPC opp5 = new NPC(5, 14, 135, 11, "Charizard");
 
+        NPC[] enemyArr= {opp1, opp2, opp3, opp4, opp5};
 
+        System.out.println("\n" + "You will fight with the following opponents in order: ");
+        for (NPC oppPokemon : enemyArr) 
+        { 
+            System.out.println(oppPokemon.toString());
+        }
+        
         // Make Pokemons fight based on the number of duels won.
         if(duelWon == 0){
             System.out.println( "\n" + "Round 1: Now you are facing: " + opp1.toString());
             fight(player,opp1);
         }
         if(duelWon == 1){
-            poki.updateScore();
+            updateScore();
             System.out.println( "\n" + "Round 2: Now you are facing: " + opp2.toString());
             fight(player,opp2);
         } 
         if(duelWon == 2){
-            poki.updateScore();
-            System.out.println( "\n" + "Round 2: Now you are facing: " + opp3.toString());
+            updateScore();
+            System.out.println( "\n" + "Round 3: Now you are facing: " + opp3.toString());
             fight(player,opp3);
         }
         if(duelWon == 3){
-            poki.updateScore();
-            System.out.println( "\n" + "Round 2: Now you are facing: " + opp4.toString());
+            updateScore();
+            System.out.println( "\n" + "Round 4: Now you are facing: " + opp4.toString());
             fight(player,opp4);
         }
         if(duelWon == 4){
-            poki.updateScore();
-            System.out.println( "\n" + "Round 2: Now you are facing: " + opp5.toString());
+            updateScore();
+            System.out.println( "\n" + "Round 5: Now you are facing: " + opp5.toString());
             fight(player,opp5);
         }
-        
-
-        
-        
-        /* 
-        NPC[] enemyArr= {opp1, poki.opp2, poki.opp3, poki.opp4, poki.opp5};
-
-        System.out.println("You will fight with the following opponents in order: ");
-        for (NPC oppPokemon : enemyArr) 
-        { 
-            System.out.println(oppPokemon.toString());
-        }
-        */
-
-        //printInstructions();
-
-        
-        Scanner sc1 = new Scanner(System.in);  // Create a Scanner object
-        sc1.close();
-        
-        
-        //Player player = new Player(0, 12, 100, 10);
-        //NPC opp1 =  new NPC(1, 10, 100, 7, "Pikachu");
-        //poki.gameStart(sc1, poki.player, poki.opp1);
-        //poki.gameStart(sc1, CharacterCreation.player, CharacterCreation.opp1);    
-
-        //poki.gameStart1(sc1, null, null)
 
     }
-
-    //characters need to be local variables because their is not updated?? -- Thought
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-    
-
 
 }

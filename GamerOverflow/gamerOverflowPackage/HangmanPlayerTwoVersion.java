@@ -10,11 +10,10 @@ public class HangmanPlayerTwoVersion {
     private int winCounter = 0;
     private int score = 9000;
     private int wrongCount = 0;
-
     private int guessesLeft = 9;
     private String word;
 	private Scanner scanner = new Scanner(System.in);
-	
+
     public void hangmanEngine() throws FileNotFoundException {
 
         introduction();
@@ -34,20 +33,28 @@ public class HangmanPlayerTwoVersion {
                 System.out.println("You won the game!");
                 playingGame = false;
             } System.out.println("Please enter your guess for the word:");
-
-            if(playingGame) {
-            playingGame = evaluateWord();
+            
+            
+            if(playingGame && evaluateWord()) {
+            playingGame = false;
+           	handleWinning();
+           	playingGame=askToPlayAgain();
             }
+            
             
             if(playingGame) {
             hangmanPicture(wrongCount);
             playingGame = handleLosing();
+            if(!playingGame) {
+            playingGame=askToPlayAgain();
             }
+            }
+       
         }
-        askToPlayAgain();
+      
     }
     
-    private boolean getPlayerGuess( ){
+    private boolean getPlayerGuess(){
 
         System.out.println("\nPlease enter a letter:");
      
@@ -172,8 +179,9 @@ public class HangmanPlayerTwoVersion {
             word = getWord();
             winCounter = 0;
             score = 9000;
-            wrongCount = 0;  // we want the winCounter to work
-            hangmanEngine();
+            wrongCount = 0;
+            guessesLeft = 9;
+          
 
             return true;
 
@@ -196,15 +204,15 @@ public class HangmanPlayerTwoVersion {
     }
     private boolean evaluateWord() throws FileNotFoundException {
     	 if(scanner.nextLine().equals(word) ){
-         	handleWinning();
-            return askToPlayAgain();
+      
+            return true;
             
          } else {
              score = score - 1000;
              guessesLeft = guessesLeft -1;
              System.out.println("The current score: " + score);
              System.out.println("You have " + guessesLeft + " tries left!");
-            return true;
+            return false;
          }
     }
     private boolean handleLosing() {
@@ -222,6 +230,7 @@ public class HangmanPlayerTwoVersion {
 
     public int returnHangmanScore()
     {
+
         return score;
     }
 

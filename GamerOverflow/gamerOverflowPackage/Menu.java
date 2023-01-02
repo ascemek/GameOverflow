@@ -63,22 +63,34 @@ public class Menu implements Observer{
                     Game punch = new PunchOut();
                     punch.gameStart(ab, p1, npc1);
                     int score = punch.returnScore();
-
                     sami.updatePunchOut(username, score);
                     sami.updateNewScore(username,score);
 
                 }
 
                 else if(selection.equals("2")){
-                    /*PokemonTestMenu pokemonTestMenu = new PokemonTestMenu();
-                    pokemonTestMenu.printInstructions();*/
+                    Game pokiGame = new Pokemon();
+                    ((Pokemon) pokiGame).runCode();
+
+                    int score = pokiGame.returnScore();
+
+                    sami.updatePokemon(username, score);
+                    sami.updateNewScore(username, score);
+
+
                 }
 
                 else if(selection.equals("3")) {
 
-                    // when the user selects 3 then the hangman game will be implemented
+                    System.out.println("\nThank you " + username + " for choosing hangman!");
                     HangmanPlayerTwoVersion hangmanPlayerTwoVersion = new HangmanPlayerTwoVersion();
                     hangmanPlayerTwoVersion.hangmanEngine();
+
+                    int score = hangmanPlayerTwoVersion.returnHangmanScore();
+                    
+                    
+                    sami.updateHangman(username,score);
+                    sami.updateNewScore(username,score);
                 } 
                 else {
                     System.out.println("You did something wrong sucker, please try again!");
@@ -95,7 +107,7 @@ public class Menu implements Observer{
 
     /**
      * This is the handle method for the menu. This is activated whenever the
-     * databse that this menu is observing updates/ calls notifyAll().
+     * database that this menu is observing updates/ calls notifyAll().
      * 
      * It basically just displays the score and calls the leaderboard to be updated.
      */
@@ -106,7 +118,11 @@ public class Menu implements Observer{
         System.out.println(args.propertyName +" got a score of: " + args.newValue);
         System.out.println("------------------------------------------------------");
 
-        LeaderBoardDisplay updater = new LeaderBoardDisplay(sami);
-        updater.leaderDisplay();
+        
+        
+        
+      LeaderBoardDisplay updater = new LeaderBoardDisplay(sami);
+      updater.leaderDisplay();
+     
     }
 }

@@ -73,6 +73,7 @@ public class Database extends Observable{
     public void updateHangman(String name, Integer score)
     {
         hangman.put(name, score);
+       
     }
     
 

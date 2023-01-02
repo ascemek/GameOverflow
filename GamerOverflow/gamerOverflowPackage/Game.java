@@ -55,8 +55,6 @@ public abstract class Game {
 
     /**
      * Updates the in game score based on whatever scoring method your game uses
-     * 
-     * @return An int representing the current score 
      */
     abstract void updateScore();
 
@@ -69,6 +67,7 @@ public abstract class Game {
      * Displays a message informing the player they lose. 
      */
     abstract void loseEnd();
+    
     /**
      * This is used to pass the game's score onto another class for use in updating
      * the database.

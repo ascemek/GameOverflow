@@ -12,9 +12,7 @@ public class LeaderBoardDisplay {
 
     //Database and information to be used 
     private static Database db;
-    private HashMap<String, Integer> pokemon = new HashMap<String, Integer>();
-    private HashMap<String, Integer> punchout = new HashMap<String, Integer>();
-    private HashMap<String, Integer> hangman = new HashMap<String, Integer>();
+   
 
     //Constructor to pass database
     public LeaderBoardDisplay(Database d1)
@@ -25,13 +23,7 @@ public class LeaderBoardDisplay {
     /**
      * Updates the info of the all the internal listings of scores and users.
      * This calls on the outside databse to update the internal hashmap of this object.
-     */
-    public void updateInfo(Database updated)
-    {
-        hangman = updated.passHang();
-        pokemon = updated.passPokemon();
-        punchout = updated.passPunch();
-    }
+    
 
     /**
      * This method starts by making sure the information is updated, creates a 
@@ -39,9 +31,23 @@ public class LeaderBoardDisplay {
      * 
      * This is then printed to an outside .txt file
      */
-    public void leaderboardSingle(HashMap<String, Integer> hash, String filepath, String gamename)
-    {
-        updateInfo(db);
+    public void leaderboardSingle(  String gamename)
+    { 
+    	String filepath;
+    	HashMap<String, Integer> hash;
+    
+    	  if(gamename.equals("H")) {
+    		 filepath="./hangmanScores.txt";
+    		 hash=Database.getDatabase().passHang();
+    	  }else if(gamename.equals("PO")) {
+    		  filepath="./pokemonScores.txt";
+     		 hash=Database.getDatabase().passPokemon();
+    		
+    	  }else {
+    		  filepath="./punchoutScores.txt";
+      		 hash=Database.getDatabase().passPunch();
+    	  }
+     
 
         String top  = gamename + "HIGH SCORES:\n----------------------------------------\n";
         String lead = "";
@@ -58,6 +64,7 @@ public class LeaderBoardDisplay {
         }
 
         String finalLead =  top + lead;
+      
         printFile(finalLead, filepath);
     }
 
@@ -66,9 +73,10 @@ public class LeaderBoardDisplay {
      */
     public void leaderDisplay()
     {
-        leaderboardSingle(hangman,"./hangmanScores.txt", "HANGMAN");
-        leaderboardSingle(pokemon,"./pokemonScores.txt", "POKEMON");
-        leaderboardSingle(punchout,"./punchoutScores.txt", "PUNCHOUT");
+  
+        leaderboardSingle( "H");
+        leaderboardSingle("PO");
+        leaderboardSingle("PU");
     }
 
     /**

@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class PunchOut extends Game {
 
-    int playerChoice;
-    int specialPoints = 3;
-    int npcPoints = 3;
-    int turns = 0;
-    int totalScore = 0;
-    int npcHealth;
+    private int playerChoice;
+    private int specialPoints = 3;
+    private int npcPoints = 3;
+    private int turns = 0;
+    private int totalScore = 0;
+    private int npcHealth;
 
     Scanner playerInput;
     
