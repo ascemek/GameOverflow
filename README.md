@@ -1,7 +1,6 @@
 # GameOverflow
-GameOverflow OOD Final Project
+GameOverflow Object Oriented Design (OOD) Final Project
 
---------------------------------------------------------------------------------------------------------------------------------
 ## Authors
 
 Contributors' names and contact info:
@@ -10,7 +9,7 @@ Contributors' names and contact info:
 * [Zach East](https://github.com/ZiongaB)
 * [Sebastian Mark](https://github.com/SebastianMark32)
 
-[Live Demo & Presentation:](https://drive.google.com/file/d/17_Ne7JDdNLrVaTEhMLxoVUiNXbY4AZdW/view?usp=sharing) 
+[Live Demo & Presentation](https://drive.google.com/file/d/17_Ne7JDdNLrVaTEhMLxoVUiNXbY4AZdW/view?usp=sharing) 
 
 ## Description
 
