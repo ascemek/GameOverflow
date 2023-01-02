@@ -1,10 +1,18 @@
 # GameOverflow
 GameOverflow OOD Final Project
 
-Sami Cemek, Zach East, Sebastian Mark
 --------------------------------------------------------------------------------------------------------------------------------
+## Authors
 
-Live Demo & Presentation: https://drive.google.com/file/d/17_Ne7JDdNLrVaTEhMLxoVUiNXbY4AZdW/view?usp=sharing
+Contributors' names and contact info:
+
+* [Sami Cemek](https://github.com/ascemek) 
+* [Zach East](https://github.com/ZiongaB)
+* [Sebastian Mark](https://github.com/SebastianMark32)
+
+[Live Demo & Presentation:](https://drive.google.com/file/d/17_Ne7JDdNLrVaTEhMLxoVUiNXbY4AZdW/view?usp=sharing) 
+
+## Description
 
 To start the game selection, go to the Demo class and compile the code. First, a prompt will appear in the console saying "Enter 
 a username:" Another prompt will appear after entering a username with a choice of games. Please select one of three games by 
@@ -37,4 +45,8 @@ the Pokemon class. We are addressing that issue.
  
 
 Have fun and enjoy the games!
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
